@@ -10,15 +10,20 @@ import {
   CardTitle
 } from '@/components/ui/card'
 import { toast } from 'sonner'
+import { createCompletion } from '@/app/actions'
 
 export default function Form() {
   async function action(formData:FormData) {
     const prompt = formData.get('prompt')
 
-    if(!prompt){
-        toast.error("Prompt is required")
-    }
+    // if(!prompt){
+    //     toast.error("Prompt is required")
+    // }
     // call server action
+    const {error} = await createCompletion(prompt as string)
+    if(error){
+        toast.error(error)
+    }
   }
 
   return (
