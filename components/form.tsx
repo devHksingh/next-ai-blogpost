@@ -9,9 +9,17 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
+import { toast } from 'sonner'
 
 export default function Form() {
-  
+  async function action(formData:FormData) {
+    const prompt = formData.get('prompt')
+
+    if(!prompt){
+        toast.error("Prompt is required")
+    }
+    // call server action
+  }
 
   return (
     <section className='mx-auto max-w-lg'>
@@ -21,7 +29,7 @@ export default function Form() {
           <CardDescription>Generate a blog post about anything</CardDescription>
         </CardHeader>
         <CardContent>
-          <form  className='mt-3'>
+          <form action={action} className='mt-3'>
             <Input
               name='prompt'
               placeholder='What should I write about?'
