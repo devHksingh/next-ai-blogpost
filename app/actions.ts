@@ -1,7 +1,8 @@
 'use server'
 
-import { error } from "console"
+import { supabase } from "@/lib/supabase"
 import OpenAI from "openai"
+import { decode } from 'base64-arraybuffer'
 
 
 const openai = new OpenAI({apiKey:process.env.OPENAI_API_KEY})
@@ -47,13 +48,24 @@ export  async function createCompletion(prompt:string){
     if(!imageData){
         return {error:'Unable to genrate the blog image'}
     }
+
+    
+    // Upload the image to supabase storage
+
+    const {data,error} = await supabase.storage.from('blogs').upload(imageName,decode(imageData),{
+        contentType:'image/png'
+    })
+
+    if(error){
+        return { error: 'Unable to upload the blog image to Storage.' }
+    }
+
 }
 
 
 
 
 
-// Upload the image to supabase storage
 
 // create a new blog post in supabase
 
