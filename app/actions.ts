@@ -60,6 +60,22 @@ export  async function createCompletion(prompt:string){
         return { error: 'Unable to upload the blog image to Storage.' }
     }
 
+    const path = data?.path
+    const imageUrl = `${process.env.SUPABASE_URL}/storage/v1/object/public/blogs/${path}`
+
+    // create a new blog post in supabase
+    const { data: blog, error: blogError } = await supabase
+    .from('blogs')
+    .insert([{ title: prompt, content, imageUrl, userId:"1234" }])
+    .select()
+
+    if (blogError) {
+        return { error: 'Unable to insert the blog into the database.' }
+      }
+
+    console.log(blog);
+    
+
 }
 
 
@@ -67,5 +83,5 @@ export  async function createCompletion(prompt:string){
 
 
 
-// create a new blog post in supabase
+
 
