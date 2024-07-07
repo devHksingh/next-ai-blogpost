@@ -14,17 +14,17 @@ export  async function createCompletion(prompt:string){
 
     // genrate blog post using openAi
 
-    const messages:any = [
+    const messages: any = [
         {
-            role:"user",
-            content:`Write a blog post around 200 words about the following topic: "${prompt}" in markdown format.`
+          role: 'user',
+          content: `Write a blog post around 200 words about the following topic: "${prompt}" in markdown format.`
         }
-    ]
+      ]
 
     const completion = await openai.chat.completions.create({
-        model:'gpt-4',
+        model: 'gpt-4',
         messages
-    })
+      })
 
     const content = completion?.choices?.[0].message?.content
 
@@ -70,6 +70,8 @@ export  async function createCompletion(prompt:string){
     .select()
 
     if (blogError) {
+        console.log("blogError : ",blogError);
+        
         return { error: 'Unable to insert the blog into the database.' }
       }
 

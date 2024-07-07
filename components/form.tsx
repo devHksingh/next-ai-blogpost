@@ -15,6 +15,8 @@ import { createCompletion } from '@/app/actions'
 export default function Form() {
   async function action(formData:FormData) {
     const prompt = formData.get('prompt')
+    console.log('prompt : ',prompt);
+    
 
     // if(!prompt){
     //     toast.error("Prompt is required")
