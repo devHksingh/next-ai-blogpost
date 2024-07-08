@@ -3,6 +3,8 @@
 import { supabase } from "@/lib/supabase"
 import OpenAI from "openai"
 import { decode } from 'base64-arraybuffer'
+import { redirect } from "next/navigation"
+
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
@@ -73,9 +75,9 @@ export async function createCompletion(prompt: string) {
     }
 
     console.log(blog);
-    // return { success: 'Blog post created successfully', blog }
     
-    // console.error("An unexpected error occurred", error);
-    // return { error: 'An unexpected error occurred.' }
+    const blogId = blog?.[0].id
+
+    redirect(`/blog/${blogId}`)
     
 }
