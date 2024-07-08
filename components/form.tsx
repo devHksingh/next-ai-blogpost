@@ -22,9 +22,9 @@ export default function Form() {
     //     toast.error("Prompt is required")
     // }
     // call server action
-    const { error } = await createCompletion(prompt as string)
-    if(error){
-        toast.error(error)
+    const result = await createCompletion(prompt as string)
+    if(result?.error){
+        toast.error(result.error)
     }
   }
 
