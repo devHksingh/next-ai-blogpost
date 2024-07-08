@@ -11,6 +11,8 @@ import {
 } from '@/components/ui/card'
 import { toast } from 'sonner'
 import { createCompletion } from '@/app/actions'
+import { useFormStatus } from 'react-dom'
+import { cn } from '@/lib/utils'
 
 export default function Form() {
   async function action(formData:FormData) {
@@ -42,12 +44,30 @@ export default function Form() {
               placeholder='What should I write about?'
               className='rounded-lg'
             />
-            <Button size='sm' type='submit' className='mt-3 w-full rounded-lg'>
-                Submit
-            </Button>
+            <SubmitButton/>
           </form>
         </CardContent>
       </Card>
     </section>
+  )
+}
+
+
+function SubmitButton(){
+  const {pending} = useFormStatus()
+
+  return (
+    <>
+      <Button
+        size={'sm'}
+        type='submit'
+        className={cn('mt-3 w-full rounded-lg', pending && 'animate-pulse')}
+        
+      >
+        {
+          pending ? 'Working on it ....':'Submit'
+        }
+      </Button>
+    </>
   )
 }
