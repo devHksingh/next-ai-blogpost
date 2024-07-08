@@ -1,4 +1,23 @@
 @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+@tailwind components;
+@tailwind utilities;
   
+.markdown h1 {
+  @apply text-3xl font-bold;
+}
+
+.markdown h2 {
+  @apply text-2xl font-semibold;
+}
+
+.markdown p {
+  @apply my-4;
+}
+
+.markdown ul {
+  @apply list-disc list-inside;
+}
+
+.markdown a {
+  @apply text-blue-500 underline;
+}

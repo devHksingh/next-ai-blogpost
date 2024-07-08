@@ -7,7 +7,8 @@ const nextConfig = {
             hostname: 'lgavwlmakxlovnqymfwk.supabase.co'
           }
         ]
-      }
+      },
+    pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
 };
 
 export default nextConfig;

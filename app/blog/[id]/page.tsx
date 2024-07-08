@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import Markdown from 'react-markdown'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
 import { getBlogById } from '@/lib/supabase'
 import { ChevronLeft } from 'lucide-react'
 
@@ -18,9 +20,11 @@ export default async function Blog({ params }: { params: { id: string } }) {
           <span>Go back</span>
         </Link>
 
-        <section className='prose prose-neutral md:prose-lg lg:prose-xl max-w-none border border-red-600 text-wrap'>
+        <section className='prose prose-neutral md:prose-lg lg:prose-xl max-w-none'>
           <Image alt='' src={imageUrl} width={1792} height={1024} />
-          <Markdown>{content}</Markdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+            {content}
+          </ReactMarkdown>
         </section>
       </div>
     </section>

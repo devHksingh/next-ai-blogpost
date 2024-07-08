@@ -18,7 +18,30 @@ export async function createCompletion(prompt: string) {
     const messages = [
         {
             role: 'user',
-            content: `Write a blog post around 200 words about the following topic: "${prompt}" in markdown format.`
+            content:    `
+            Write a blog post around 200 words about the following topic: "${prompt}" in markdown format.
+  
+          The blog post should be structured as follows:
+  
+          1. **Title**: A compelling and attention-grabbing title.
+          2. **Introduction**: A brief introduction to the topic that hooks the reader.
+          3. **Section 1: Heading**: A main heading for the first section.
+              - **Subheading 1.1**: A subheading under the first section.
+                  - **Paragraph**: A detailed paragraph explaining Subheading 1.1 with relevant examples or insights.
+              - **Subheading 1.2**: Another subheading under the first section.
+                  - **Paragraph**: A detailed paragraph explaining Subheading 1.2 with relevant examples or insights.
+          4. **Section 2: Heading**: A main heading for the second section.
+              - **Subheading 2.1**: A subheading under the second section.
+                  - **Paragraph**: A detailed paragraph explaining Subheading 2.1 with relevant examples or insights.
+              - **Subheading 2.2**: Another subheading under the second section.
+                  - **Paragraph**: A detailed paragraph explaining Subheading 2.2 with relevant examples or insights.
+          5. **Conclusion**: Summarize the main points of the blog post and provide a closing thought or call to action.
+  
+          The writing style should be engaging, informative, and similar to blog posts found on daily.dev and Medium. Use clear headings and subheadings, and ensure the content is well-researched and relevant.
+  
+          Topic: "${prompt}"
+          `
+         
         }
     ]
 
