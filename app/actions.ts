@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabase"
 import OpenAI from "openai"
 import { decode } from 'base64-arraybuffer'
 import { redirect } from "next/navigation"
+import { revalidatePath } from "next/cache"
 
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
@@ -101,6 +102,7 @@ export async function createCompletion(prompt: string) {
     
     const blogId = blog?.[0].id
 
+    revalidatePath('/')
     redirect(`/blog/${blogId}`)
     
 }
