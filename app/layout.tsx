@@ -3,6 +3,13 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import { Toaster } from "@/components/ui/sonner"
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,11 +25,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Header/>
-        <main>{children}</main>
-        <Toaster position="top-right" theme="light" richColors/>
+      <ClerkProvider>
+        <body className={inter.className}>
+          <Header/>
+          <main>{children}</main>
+          <Toaster position="top-right" theme="light" richColors/>
         </body>
+        </ClerkProvider>  
     </html>
   );
 }
