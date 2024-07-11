@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import Logo from './logo'
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 
 
 export default function Header() {
@@ -11,9 +12,17 @@ export default function Header() {
           <Logo />
         </Link>
 
-        <Button size='sm' variant='ghost'>
-            Sign in
-        </Button>
+        <SignedIn>
+          <UserButton afterSignOutUrl='/' />
+        </SignedIn>
+
+        <SignedOut>
+          <SignInButton mode='modal'>
+            <Button size='sm' variant='ghost'>
+              Sign in
+            </Button>
+          </SignInButton>
+        </SignedOut>
 
         
       </div>
