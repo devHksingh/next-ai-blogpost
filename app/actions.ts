@@ -5,6 +5,7 @@ import OpenAI from "openai"
 import { decode } from 'base64-arraybuffer'
 import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
+import { auth } from '@clerk/nextjs/server'
 
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
@@ -12,6 +13,13 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 export async function createCompletion(prompt: string) {
     if (!prompt) {
         return { error: 'Prompt is required' }
+    }
+
+    // check user loginIn or Not
+
+    const {userId} = auth()
+    if(!userId){
+        return {error: 'user is not loggedIn'}
     }
 
     
@@ -90,7 +98,7 @@ export async function createCompletion(prompt: string) {
 
     const { data: blog, error: blogError } = await supabase
         .from('blogs')
-        .insert([{ title: prompt, content, imageUrl, userId: "1236" }])
+        .insert([{ title: prompt, content, imageUrl, userId: userId }])
         .select()
 
     if (blogError) {
