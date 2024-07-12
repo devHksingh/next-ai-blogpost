@@ -5,6 +5,9 @@ import { formatDate } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
+
+export const maxDuration = 90
+
 export default async function Home() {
 
   const blogs = await getAllBlogs()
