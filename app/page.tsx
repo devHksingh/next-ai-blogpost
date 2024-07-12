@@ -7,7 +7,7 @@ import Link from "next/link";
 
 // 
 
-export const maxDuration = 90
+// export const maxDuration = 90
 
 export default async function Home() {
 
